@@ -17,3 +17,10 @@ Route::get('/', function () {
     // return view('welcome');
     return view('app');
 });
+
+Route::get('/posts', function(){
+    $posts=\App\Models\Post::all();
+    return response()->json([
+        'posts'=>$posts
+    ]);
+});
