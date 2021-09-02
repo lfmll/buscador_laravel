@@ -2,7 +2,14 @@
     <div id="appWrapper">
         <div class="container">
             <div class="search-box">
-                <input class="search-input" type="text" name="q" placeholder="Escriba una palabra...">
+                <input 
+                    class="search-input" 
+                    type="text" 
+                    name="q" 
+                    placeholder="Escriba una palabra..."
+                    v-model="query"
+                    @input="search"
+                    >
                 <ul class="result-list show">
                     <li class="result-item">
                         <a href="#" class="result-link">
@@ -20,7 +27,21 @@
 
 export default {
     data() {
-        return{}
+        return{
+            query:''
+        }
+    },
+    methods:{
+        search(){
+            // console.log(this.query);
+            axios.post('/posts/search',{
+                q:this.query
+            }).then(res=>{
+                console.log(res);
+            }).catch(error=>{
+                console.log(error.response);
+            })
+        }
     }
 }
 </script>
